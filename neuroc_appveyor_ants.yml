@@ -88,3 +88,13 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+
+deploy:
+  provider: GitHub
+  description: 'Windows Binary'
+  auth_token:
+    secure: ${NEUROCKEY}
+  draft: false
+  prerelease: false
+  on:
+    appveyor_repo_tag: true
