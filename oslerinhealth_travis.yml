@@ -1,4 +1,4 @@
-# Neuroconductor Template no ANTs
+# OslerInHealth Template no ANTs
 language: r
 sudo: false
 cache: packages
@@ -7,10 +7,16 @@ use_bioc: true
 bioc_required: true
 cran: http://cran.rstudio.com
 
+env:
+  global: 
+    - RGL_USE_NULL=TRUE
+    - PROJECT_NAME=oslerinhealth
+
 os:
   - linux
   - osx
 
+r_check_args: --as-cran
 # r_check_args: "--as-cran --install-args=--build"
 
 before_install:
@@ -19,6 +25,8 @@ before_install:
   - wget -O ${fname} http://bit.ly/travis_helpers
   - cat ${fname}; source ${fname}; rm ${fname}  
   - cat DESCRIPTION
+  - Rscript -e 'source("https://install-github.me/mangothecat/callr")'
+  - jags_install  
   - remove_neuroc_packages 
   - cat DESCRIPTION
   - install_remotes_no_dep
@@ -38,9 +46,9 @@ after_failure:
 before_deploy:
   - R CMD INSTALL --build ${PKG_TARBALL}
   # so no overwrite of linux build
-  - if [ "$TRAVIS_OS_NAME" == "osx" ];
+  - if [[ "${TRAVIS_OS_NAME}" = "osx" ]];
     then
-    rm -f *.tar.gz
+      rm -f *.tar.gz;
     fi
 
 deploy:
