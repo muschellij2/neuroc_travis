@@ -17,6 +17,7 @@ env:
   - R_BUILD_ARGS="--no-build-vignettes --no-manual"
   - R_CHECK_ARGS="--as-cran --install-args=--build"
   - RGL_USE_NULL=TRUE
+  - WARNINGS_ARE_ERRORS=1 
   - PROJECT_NAME=neuroconductor
 
 before_install:
@@ -111,4 +112,6 @@ deploy:
 after_deploy:
   - if [[ "${PACKAGE_NAME}" != "ANTsR" && "${PACKAGE_NAME}" != "ITKR" && "${PACKAGE_NAME}" != "ANTsRCore" ]]; 
       Rscript -e 'covr::coveralls(type = "all")' ;
-    fi 
+    fi
+
+
