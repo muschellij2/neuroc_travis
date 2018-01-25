@@ -50,7 +50,7 @@ before_install:
     then
       gsl_install ;
     fi
-  - ralias
+  - ralias; R -e "cat('test')"; ls travis_*.log
 
 after_success:
   - cat ${PACKAGE_NAME}.Rcheck/00install.out
