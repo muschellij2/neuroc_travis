@@ -6,7 +6,7 @@ warnings_are_errors: true
 use_bioc: true
 bioc_required: true
 cran: http://cran.rstudio.com
-dist: precise
+dist: trusty
 
 os:
   - linux
@@ -23,6 +23,7 @@ env:
   - DISPLAY=:99.0
 
 before_install:
+  - export LD_LIBRARY_PATH=/usr/local/clang/lib:${LD_LIBRARY_PATH}
   - export PROJ_DIR=`basename $PWD`
   - echo "travis_wait*\.log$" >> .Rbuildignore
   - fname=travis_helpers.sh
@@ -73,6 +74,7 @@ before_install:
   - cat DESCRIPTION
   - echo $PATH ;
   - install_deps_no_suggests
+  - travis_run_cache 
 
 script:
   # - source ~/.R/Makevars
@@ -87,7 +89,9 @@ script:
     then
       echo "R CMD check failed"; 
       check_fail; 
-      exit 1; 
+      dump_logs; 
+      # exit 1; 
+      travis_terminate 1;
     fi  
   - check_warnings
   # - Rscript -e "message(devtools::check_failures(path = \"${RCHECK_DIR}\"))" ;
@@ -98,12 +102,10 @@ script:
   #   fi
 
 after_success:
-  - cat ${PACKAGE_NAME}.Rcheck/00install.out
-  - cat ${PACKAGE_NAME}.Rcheck/00check.log
+  - dump_logs
 
 after_failure:
-  - cat ${PACKAGE_NAME}.Rcheck/00install.out
-  - cat ${PACKAGE_NAME}.Rcheck/00check.log
+  - dump_logs
 
 # so no overwrite of linux build
 before_deploy:
