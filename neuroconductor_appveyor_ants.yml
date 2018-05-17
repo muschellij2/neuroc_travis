@@ -22,9 +22,9 @@ cache:
 
 # Adapt as necessary starting from here
 build_script:
-  - set TMP=C:/
-  - set TMPDIR=C:/
-  - set TEMP=C:/
+  - set TMP=C:\
+  - set TMPDIR=C:\
+  - set TEMP=C:\
   # need to move to higher dir because CMake path req
   - mkdir C:\run
   - cp -avr * C:\run
@@ -65,6 +65,7 @@ test_script:
   - travis-tool.sh run_tests
   - ls
   - cp -r C:/run/* %APPVEYOR_BUILD_FOLDER%
+  - cp C:/run/.Rbuildignore %APPVEYOR_BUILD_FOLDER%  
   - cd %APPVEYOR_BUILD_FOLDER%
   - ls
 
