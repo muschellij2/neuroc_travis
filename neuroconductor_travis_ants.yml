@@ -32,6 +32,7 @@ before_install:
   - cat ${fname}; source ${fname}; rm ${fname}  
   - cat DESCRIPTION
   - start_xvfb ;  
+  - export rver=`r_version`;  
   - export PACKAGE_NAME=`package_name`  
   - export RCHECK_DIR=${PACKAGE_NAME}.Rcheck
   - Rscript -e 'source("https://install-github.me/mangothecat/callr")'
@@ -97,6 +98,12 @@ script:
       dump_logs; 
       travis_terminate 1;
     fi  
+  - if [ "$TRAVIS_OS_NAME" = "osx" ];
+    then 
+      PKG_TARBALL=$(ls -1t *.tgz | head -n 1); 
+      PKG_TARBALL_WITH_R=`echo $PKG_TARBALL | sed 's/.tgz/_'"R${rver}"'.tgz/'` ;
+      mv ${PKG_TARBALL} ${PKG_TARBALL_WITH_R} ;
+    fi
   - check_warnings
   # - Rscript -e "message(devtools::check_failures(path = \"${RCHECK_DIR}\"))" ;
   # - grep -q -R "WARNING" "${RCHECK_DIR}/00check.log" ; if [[ $? -eq 0 ]]; error 1; fi  
@@ -131,7 +138,8 @@ deploy:
 after_deploy:
   - if [[ "${PACKAGE_NAME}" != "ANTsR" && "${PACKAGE_NAME}" != "ITKR" && "${PACKAGE_NAME}" != "ANTsRCore" ]]; 
     then
-      Rscript -e 'covr::coveralls(type = "all")' ;
+      if [[ "${TRAVIS_R_VERSION_STRING}" = "release" ]]; then
+        Rscript -e 'covr::coveralls(type = "all")' ;
+      fi
     fi
-
 
