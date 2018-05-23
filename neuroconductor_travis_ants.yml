@@ -13,6 +13,11 @@ os:
   - osx
 osx_image: xcode9 
 
+
+r:
+- release
+- devel
+
 env:
   global:
   - R_BUILD_ARGS="--no-manual"
