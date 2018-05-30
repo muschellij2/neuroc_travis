@@ -17,8 +17,8 @@ osx_image: xcode9
 r:
 - 3.2
 - 3.3
-- oldrel
-- release
+- 3.4
+- 3.5
 - devel
 
 allow_failures:
