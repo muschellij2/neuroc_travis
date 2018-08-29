@@ -1,4 +1,4 @@
-# Neuroconductor Template
+# Neuroconductor Template for ANTsR Dep
 language: r
 sudo: false
 cache: packages
