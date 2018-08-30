@@ -8,6 +8,13 @@ bioc_required: true
 cran: http://cran.rstudio.com
 dist: trusty
 
+addons:
+  apt:
+    packages:
+    - libfftw3-dev
+    - libgsl0-dev
+    - libgsl0ldbl
+
 os:
   - linux
   - osx
@@ -24,7 +31,6 @@ r:
 matrix:
   allow_failures:
     - r: devel
-    - os: osx
 
 env:
   global:
