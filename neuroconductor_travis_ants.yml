@@ -21,9 +21,10 @@ r:
 - release
 - devel
 
-allow_failures:
-  - r: devel
-  - os: osx
+matrix:
+  allow_failures:
+    - r: devel
+    - os: osx
 
 env:
   global:
