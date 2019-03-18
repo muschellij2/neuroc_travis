@@ -51,6 +51,7 @@ before_install:
   - cat DESCRIPTION
   - start_xvfb ;  
   - v8_install ;
+  - dcmtk_install ;  
   - export rver=`r_version`; echo $rver ;
   - export PACKAGE_NAME=`package_name`  
   - export RCHECK_DIR=${PACKAGE_NAME}.Rcheck
