@@ -166,6 +166,7 @@ deploy:
   api_key:
     secure: "${NEUROCKEY}"
   file_glob: true
+  overwrite: true   
   file: ${PACKAGE_NAME}*.t*gz
   on:
     tags: true
