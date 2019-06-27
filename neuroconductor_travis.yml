@@ -57,6 +57,10 @@ before_install:
   - jags_install ;  
   - v8_install ;
   - dcmtk_install ;
+  - export cmake_version="3.11"
+  - cmake --version
+  - x=`cmake_setup`; echo "${x}"; eval ${x};
+  - cmake --version  
   - remove_neuroc_packages 
   - cat DESCRIPTION
   - install_remotes_no_dep
@@ -124,8 +128,8 @@ deploy:
     tags: true
 
 after_deploy:
-  # travis_wait 100 Rscript -e 'covr::coveralls(type = "all")' ;
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" && ${TRAVIS_R_VERSION_STRING} = "release" ]]; 
+  - echo "${PROJECT_NAME}" | grep -q "releases"; if [[ $? -eq 0 ]]; then run_coverage="false"; else run_coverage=; fi; 
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" && ${TRAVIS_R_VERSION_STRING} = "release" && -z "${run_coverage}" ]]; 
     then
       echo 'covr::coveralls(type = "all", quiet = FALSE)' > neuroc_covr.R ;
       travis_wait 100 Rscript neuroc_covr.R ;
