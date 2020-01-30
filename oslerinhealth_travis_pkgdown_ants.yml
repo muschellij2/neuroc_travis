@@ -124,7 +124,7 @@ deploy:
   skip-cleanup: true
   keep-history: true
   local-dir: docs
-  on:
+  'on':
     branch: master
   github_token: $GITHUB_TOKEN
 

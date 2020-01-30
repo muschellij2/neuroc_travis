@@ -187,7 +187,7 @@ deploy:
   file_glob: true
   overwrite: true   
   file: ${PACKAGE_NAME}*.t*gz
-  on:
+  'on':
     tags: true
 
 after_deploy:

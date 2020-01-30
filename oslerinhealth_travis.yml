@@ -113,7 +113,7 @@ deploy:
     secure: "${NEUROCKEY}"
   file_glob: true
   file: ${PACKAGE_NAME}*.t*gz
-  on:
+  'on':
     tags: true
 
 after_deploy:
