@@ -17,7 +17,6 @@ addons:
     - libglu1-mesa-dev 
     - devscripts
 
-  
 os:
   - linux
 
@@ -114,10 +113,6 @@ script:
   - travis_wait 100 Rscript -e 'pkgdown::build_site()'
 
 
-after_failure:
-
-before_deploy:
-
 deploy:
   provider: pages
   skip_cleanup: true
@@ -126,5 +121,3 @@ deploy:
   'on':
     branch: master
   token: $GITHUB_TOKEN
-
-after_deploy:
