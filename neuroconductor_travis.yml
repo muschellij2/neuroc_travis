@@ -36,7 +36,7 @@ r:
 - release
 - devel
 
-matrix:
+jobs:
   allow_failures:
     - r: devel
 
@@ -134,7 +134,7 @@ before_deploy:
 deploy:
   provider: releases
   skip_cleanup: true
-  api_key:
+  token:
     secure: "${NEUROCKEY}"
   file_glob: true
   overwrite: true 

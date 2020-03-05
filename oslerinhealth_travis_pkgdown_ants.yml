@@ -2,7 +2,6 @@
 language: r
 warnings_are_errors: false
 cache: false
-use_bioc: true
 bioc_required: true
 cran: http://cran.rstudio.com
 dist: trusty
@@ -121,11 +120,10 @@ before_deploy:
 
 deploy:
   provider: pages
-  skip-cleanup: true
-  keep-history: true
-  local-dir: docs
+  keep_history: true
+  local_dir: docs
   'on':
     branch: master
-  github_token: $GITHUB_TOKEN
+  token: $GITHUB_TOKEN
 
 after_deploy:
