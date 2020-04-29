@@ -4,7 +4,7 @@ warnings_are_errors: true
 cache: packages
 bioc_required: true
 cran: http://cran.rstudio.com
-dist: trusty
+dist: xenial
 
 addons:
   apt:
@@ -17,7 +17,8 @@ addons:
     - libglu1-mesa-dev
     - devscripts
     - libomp-dev
-
+    - libhdf5-serial-dev 
+    - libhdf5-dev
 
 # r_binary_packages:
 #   - rgl
@@ -31,9 +32,9 @@ services:
   - xvfb
 
 r:
-- 3.3
 - 3.4
 - 3.5
+- 3.6
 - release
 - devel
 
